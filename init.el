@@ -227,7 +227,7 @@
 (push 'ggtags my-el-get-packages)
 (push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
-(push 'grandshell my-el-get-packages)
+;;(push 'grandshell my-el-get-packages)
 (push 'iedit my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'multiple-cursors my-el-get-packages)
@@ -251,7 +251,7 @@
 (push 'openwith my-el-get-packages)
 
 ;; text modes
-(push 'auctex my-el-get-packages)
+;;(push 'auctex my-el-get-packages)
 (push 'markdown-mode my-el-get-packages)
 (push 'org-mode my-el-get-packages)
 (push 'yaml-mode my-el-get-packages)
@@ -265,7 +265,7 @@
 ;(push 'ecb my-el-get-packages)
 (push 'ess my-el-get-packages) ; for R
 (push 'lua-mode my-el-get-packages)
-(push 'mmm-mode my-el-get-packages)
+;;(push 'mmm-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 (push 'processing-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
@@ -311,7 +311,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'grandshell t)
+;;(load-theme 'grandshell t)
 ;;(load-theme 'green-phosphor t)
 (load-theme 'mytheme t)
 
@@ -325,7 +325,7 @@
   (interactive)
   (set-face-font 'default "-*-terminus-medium-r-*-*-28-*-*-*-*-*-*-*")
   (disable-theme 'mytheme)
-  (disable-theme 'grandshell)
+  ;;(disable-theme 'grandshell)
   (load-theme 'leuven t))
 
 ;; -----------------------------------
@@ -544,7 +544,7 @@
 ;; disable toolbar
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(menu-bar-mode -1)
+(menu-bar-mode 1)
 
 ;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -1357,4 +1357,4 @@
 (setq vc-ignore-dir-regexp
       (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
 
-(require 'org-s5)
+;;(require 'org-s5)
