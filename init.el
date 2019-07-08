@@ -36,6 +36,8 @@
  '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(auth-sources
    (quote
     ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
@@ -46,7 +48,7 @@
    (quote
     (opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields)))
  '(bibtex-maintain-sorted-entries (quote crossref))
- '(blink-cursor-mode nil)
+ '(blink-cursor-mode t)
  '(c-basic-offset 4)
  '(c-default-style
    (quote
@@ -65,6 +67,7 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
+ '(custom-enabled-themes (quote (deeper-blue)))
  '(custom-safe-themes
    (quote
     ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
@@ -96,6 +99,7 @@
  '(ggtags-highlight-tag-delay 10000.0)
  '(git-commit-fill-column 1000)
  '(git-commit-summary-max-length 1000)
+ '(global-display-line-numbers-mode t)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
  '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
@@ -132,6 +136,7 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame))))
+ '(org-link-shell-confirm-function nil)
  '(org-tab-follows-link t)
  '(org-time-clocksum-format
    (quote
@@ -156,7 +161,8 @@
      (rebox-min-fill-column . 110)
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
- '(search-whitespace-regexp "[ \t\r\n]+")
+ '(search-whitespace-regexp "[ 	
+]+")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
@@ -164,7 +170,10 @@
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
- '(vc-handled-backends (quote (svn))))
+ '(vc-handled-backends (quote (svn)))
+ '(vhdl-company-name "KLANG:technologies")
+ '(vhdl-upper-case-keywords t)
+ '(vhdl-upper-case-types t))
 
 ;; ---------------------------
 ;; --- change default font ---
