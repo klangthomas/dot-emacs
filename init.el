@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -141,6 +148,7 @@
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+ '(package-selected-packages (quote (dts-mode)))
  '(processing-location "~/.bin-local/processing-java")
  '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
@@ -172,8 +180,8 @@
  '(undo-strong-limit 120000000)
  '(vc-handled-backends (quote (svn)))
  '(vhdl-company-name "KLANG:technologies")
- '(vhdl-upper-case-keywords t)
- '(vhdl-upper-case-types t))
+ '(vhdl-upper-case-keywords nil)
+ '(vhdl-upper-case-types nil))
 
 ;; ---------------------------
 ;; --- change default font ---
