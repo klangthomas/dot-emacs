@@ -122,7 +122,7 @@
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
    (quote
-    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbgit@panthema.net")))
+    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Thomas Maintz" "-c" "user.email=thomas.maintz@klang.com")))
  '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
  '(magit-pull-arguments nil)
@@ -180,6 +180,27 @@
  '(undo-strong-limit 120000000)
  '(vc-handled-backends (quote (svn)))
  '(vhdl-company-name "KLANG:technologies")
+ '(vhdl-file-header
+   "-------------------------------------------------------------------------------
+-- Title      : <title string>
+-- Project    : <project>
+-------------------------------------------------------------------------------
+-- File       : <filename>
+-- Author     : Thomas Maintz - thomas.maintz@klang.com
+-- Company    : <company>
+-- Created    : <date>
+-- Last update: <date>
+-- Platform   : <platform>
+-- Standard   : <standard>
+<projectdesc>-------------------------------------------------------------------------------
+-- Description: <cursor>
+<copyright>-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author  Description
+-- <date>  1.0      <login>	Created
+-------------------------------------------------------------------------------
+
+")
  '(vhdl-upper-case-keywords nil)
  '(vhdl-upper-case-types nil))
 
