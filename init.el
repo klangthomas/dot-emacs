@@ -77,7 +77,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(custom-safe-themes
    (quote
-    ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+    ("b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
@@ -180,6 +180,7 @@
  '(undo-strong-limit 120000000)
  '(vc-handled-backends (quote (svn)))
  '(vhdl-company-name "KLANG:technologies")
+ '(vhdl-compose-architecture-name (quote (".*" . "behavioral")))
  '(vhdl-file-header
    "-------------------------------------------------------------------------------
 -- Title      : <title string>
