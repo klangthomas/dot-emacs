@@ -77,7 +77,7 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(custom-safe-themes
    (quote
-    ("b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+    ("fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
@@ -642,10 +642,10 @@
 
 ; svn integration
 
-(autoload 'svn-status "dsvn" "Run `svn status'." t)
-(autoload 'svn-update "dsvn" "Run `svn update'." t)
+;(autoload 'svn-status "dsvn" "Run `svn status'." t)
+;(autoload 'svn-update "dsvn" "Run `svn update'." t)
 
-(global-set-key (kbd "<C-f11>") 'svn-status)
+;(global-set-key (kbd "<C-f11>") 'svn-status)
 
 ; go to last edit point
 
@@ -1145,6 +1145,14 @@
     ))
 
 (global-set-key [f5] 'my-compile)
+
+;; -----------------------------------
+;; --- Files via SSH on working machine ---
+;; -----------------------------------
+(defun connect-remote ()
+  (interactive)
+  (dired "/ssh:ccx@klinux:/"))
+(global-set-key (kbd "<C-f11>") 'connect-remote)
 
 ;; -----------------------------------
 ;; --- Grand Unified Debugger mode ---
