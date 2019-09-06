@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -74,10 +73,10 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
- '(custom-enabled-themes (quote (deeper-blue)))
+ '(custom-enabled-themes (quote (leuven)))
  '(custom-safe-themes
    (quote
-    ("fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+    ("170bb47b35baa3d2439f0fd26b49f4278e9a8decf611aa33a0dad1397620ddc3" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
@@ -352,7 +351,7 @@
 
 ;;(load-theme 'grandshell t)
 ;;(load-theme 'green-phosphor t)
-(load-theme 'mytheme t)
+;;(load-theme 'mytheme t)
 
 (defun my-presentation-font ()
   "Set the default font to be BIG (for presentations)."
