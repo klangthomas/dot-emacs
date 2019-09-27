@@ -42,6 +42,8 @@
  '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(auth-sources
@@ -73,7 +75,7 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
- '(custom-enabled-themes (quote (leuven)))
+ '(custom-enabled-themes (quote (misterioso)))
  '(custom-safe-themes
    (quote
     ("170bb47b35baa3d2439f0fd26b49f4278e9a8decf611aa33a0dad1397620ddc3" "fa2af0c40576f3bde32290d7f4e7aa865eb6bf7ebe31eb9e37c32aa6f4ae8d10" "b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
