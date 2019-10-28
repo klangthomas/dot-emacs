@@ -105,12 +105,12 @@
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
  '(ggtags-highlight-tag-delay 10000.0)
- '(git-commit-fill-column 1000)
- '(git-commit-summary-max-length 1000)
+; '(git-commit-fill-column 1000)
+; '(git-commit-summary-max-length 1000)
  '(global-display-line-numbers-mode t)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
- '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
+; '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
  '(ido-auto-merge-delay-time 0.4)
  '(ido-save-directory-list-file "~/.emacs.d/ido.last")
  '(ido-show-dot-for-dired t)
@@ -120,15 +120,15 @@
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
  '(lua-indent-level 4)
- '(magit-diff-arguments (quote ("--ignore-all-space")))
- '(magit-git-global-arguments
+; '(magit-diff-arguments (quote ("--ignore-all-space")))
+; '(magit-git-global-arguments
    (quote
     ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Thomas Maintz" "-c" "user.email=thomas.maintz@klang.com")))
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
- '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
- '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count (quote all))
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
+; '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
+; '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+; '(magit-pull-arguments nil)
+; '(magit-refs-show-commit-count (quote all))
+; '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
  '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
@@ -213,7 +213,7 @@
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
 ;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
+;(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
 ;(set-face-font 'default "-*-Helvetica-medium-r-normal-*-14-*-*-*-m-*-fontset-Helvetica")
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
@@ -242,7 +242,7 @@
 ;; configure el-get
 (setq el-get-install-branch "master"
       el-get-install-skip-emacswiki-recipes t
-      el-get-git-shallow-clone t
+;      el-get-git-shallow-clone t
       )
 
 (unless (require 'el-get nil t)
@@ -317,9 +317,9 @@
 ;(push 'csharp-mode my-el-get-packages)
 
 ;; version control
-(push 'dsvn my-el-get-packages)
-(push 'magit my-el-get-packages)
-(push 'magit-svn my-el-get-packages)
+;(push 'dsvn my-el-get-packages)
+;(push 'magit my-el-get-packages)
+;(push 'magit-svn my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -632,14 +632,14 @@
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
 ; auto-load magit-svn-mode if git-svn repo is detected.
-(add-hook 'magit-mode-hook
-          (lambda()
+;(add-hook 'magit-mode-hook
+;          (lambda()
             ;(require 'magit-svn)
             ;(if (magit-svn-get-ref-info) (magit-svn-mode))
-            ))
+;           ))
 
 ;; Git-Commit-Mode: flyspell
-(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+;(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
 
 ; svn integration
 
