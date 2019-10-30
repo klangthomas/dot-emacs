@@ -10,6 +10,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
+ '(custom-enabled-themes (quote (tsdh-dark)))
+ '(custom-safe-themes
+   (quote
+    ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
@@ -47,8 +53,8 @@
 (create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
 (create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
 
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+(global-set-key (kbd "<M-wheel-up>") 'text-scale-increase)
+(global-set-key (kbd "<M-wheel-down>") 'text-scale-decrease)
 
 (global-set-key (kbd "<mouse-6>") (lambda (event) (interactive "e")))
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
@@ -152,7 +158,7 @@
 
 ;;(load-theme 'grandshell t)
 ;;(load-theme 'green-phosphor t)
-(load-theme 'mytheme t)
+;;(load-theme 'mytheme t)
 
 (defun my-presentation-font ()
   "Set the default font to be BIG (for presentations)."
