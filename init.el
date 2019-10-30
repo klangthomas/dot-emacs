@@ -10,175 +10,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(LaTeX-fold-env-spec-list
-   (quote
-    (("[tikzpicture]"
-      ("tikzpicture"))
-     ("[algorithm]"
-      ("algorithm"))
-     ("[algorithm2e]"
-      ("algorithm2e")))))
- '(LaTeX-fold-macro-spec-list nil)
- '(LaTeX-fold-math-spec-list nil)
- '(TeX-command-list
-   (quote
-    (("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
-      (latex-mode doctex-mode)
-      :help "Run LaTeX")
-     ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with Info output")
-     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
-     ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber")
-     ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
-     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
-     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
- '(TeX-fold-env-spec-list nil)
- '(TeX-fold-macro-spec-list nil)
- '(TeX-fold-math-spec-list nil)
- '(TeX-save-query nil)
- '(TeX-source-correlate-mode t)
- '(ag-highlight-search t)
- '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
- '(ag-reuse-buffers t)
- '(ag-reuse-window t)
- '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(auth-sources
-   (quote
-    ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
- '(auto-save-interval 3000)
- '(auto-save-timeout 60)
- '(bibtex-comma-after-last-field t)
- '(bibtex-entry-format
-   (quote
-    (opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields)))
- '(bibtex-maintain-sorted-entries (quote crossref))
- '(blink-cursor-mode t)
- '(c-basic-offset 4)
- '(c-default-style
-   (quote
-    ((java-mode . "java")
-     (awk-mode . "awk")
-     (other . "k&r"))))
- '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
- '(c-tab-always-indent nil)
- '(column-number-mode t)
- '(compilation-always-kill t)
- '(cperl-continued-brace-offset -4)
- '(cperl-continued-statement-offset 4)
- '(cperl-extra-newline-before-brace t)
- '(cperl-extra-newline-before-brace-multiline nil)
- '(cperl-indent-level 4)
- '(cperl-indent-parens-as-block t)
- '(cperl-label-offset -4)
- '(cperl-merge-trailing-else nil)
- '(custom-enabled-themes (quote (deeper-blue)))
- '(custom-safe-themes
-   (quote
-    ("b75eaaed9ca5f8b28aa33a4f240c6b86da5abace4cbf2405282e7c0e2abbef79" "4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
- '(dired-dwim-target t)
- '(diredp-hide-details-initially-flag nil)
- '(diredp-image-preview-in-tooltip nil)
- '(doc-view-continuous t)
- '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
- '(ede-simple-save-directory "~/.emacs.d/ede-simple")
- '(ediff-autostore-merges t)
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(fill-column 80)
- '(flyspell-issue-welcome-flag nil)
- '(font-latex-fontify-sectioning 1.0)
- '(font-latex-match-reference-keywords
-   (quote
-    (("printbibliography" "[{")
-     ("addbibresource" "[{")
-     ("autoref" "[{")
-     ("cref" "[{")
-     ("Cref" "[{")
-     ("crefrange" "[{")
-     ("Crefrange" "[{"))))
- '(fringe-mode (quote (nil . 0)) nil (fringe))
- '(gdb-many-windows t)
- '(ggtags-highlight-tag 10000.0)
- '(ggtags-highlight-tag-delay 10000.0)
- '(git-commit-fill-column 1000)
- '(git-commit-summary-max-length 1000)
- '(global-display-line-numbers-mode t)
- '(gnus-init-file "~/.emacs.d/gnus-init.el")
- '(grep-command "grep -nH ")
- '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
- '(ido-auto-merge-delay-time 0.4)
- '(ido-save-directory-list-file "~/.emacs.d/ido.last")
- '(ido-show-dot-for-dired t)
- '(indent-tabs-mode nil)
- '(inhibit-startup-screen t)
- '(ispell-highlight-face (quote flyspell-incorrect))
- '(jde-jdk (quote ("1.7.0.51")))
- '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
- '(lua-indent-level 4)
- '(magit-diff-arguments (quote ("--ignore-all-space")))
- '(magit-git-global-arguments
-   (quote
-    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Thomas Maintz" "-c" "user.email=thomas.maintz@klang.com")))
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
- '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
- '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count (quote all))
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
- '(make-backup-files nil)
- '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
- '(org-clock-mode-line-total (quote today))
- '(org-clock-persist t)
- '(org-confirm-shell-link-function nil)
- '(org-export-allow-bind-keywords t)
- '(org-export-backends (quote (ascii html latex md)))
- '(org-link-frame-setup
-   (quote
-    ((vm . vm-visit-folder-other-frame)
-     (vm-imap . vm-visit-imap-folder-other-frame)
-     (gnus . org-gnus-no-new-news)
-     (file . find-file)
-     (wl . wl-other-frame))))
- '(org-link-shell-confirm-function nil)
- '(org-tab-follows-link t)
- '(org-time-clocksum-format
-   (quote
-    (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(package-selected-packages (quote (dts-mode)))
- '(processing-location "~/.bin-local/processing-java")
- '(processing-sketchbook-dir "~/Dropbox/sketchbook")
- '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
- '(reftex-ref-style-default-list (quote ("Cleveref")))
- '(replace-lax-whitespace t)
- '(replace-regexp-lax-whitespace t)
- '(safe-local-variable-values
-   (quote
-    ((eval add-to-list
-           (make-variable-buffer-local
-            (quote LaTeX-fold-math-spec-list))
-           (quote
-            ("[tabular]"
-             ("tabular"))))
-     (c-tab-always-indent . t)
-     (nxml-child-indent . 4)
-     (rebox-min-fill-column . 100)
-     (rebox-min-fill-column . 110)
-     (rebox-min-fill-column . 120))))
- '(scroll-bar-mode (quote right))
- '(search-whitespace-regexp "[ 	
-]+")
- '(sieve-manage-default-port "4190")
- '(size-indication-mode t)
- '(smex-save-file "~/.emacs.d/smex-items")
- '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
- '(vc-handled-backends (quote (svn)))
  '(vhdl-company-name "KLANG:technologies")
  '(vhdl-compose-architecture-name (quote (".*" . "behavioral")))
  '(vhdl-file-header
@@ -209,17 +43,8 @@
 ;; --- change default font ---
 ;; ---------------------------
 
-;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
-
-;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
-;(set-face-font 'default "-*-Helvetica-medium-r-normal-*-14-*-*-*-m-*-fontset-Helvetica")
-
-;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
-
 (create-fontset-from-fontset-spec "-misc-fixed-medium-r-normal--15-*-*-*-c-90-fontset-Fixed")
 (create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
-(create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
 (create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
 
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
@@ -227,6 +52,11 @@
 
 (global-set-key (kbd "<mouse-6>") (lambda (event) (interactive "e")))
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
+
+;; ---------------------------------
+;; --- git program declaration   ---
+;; ---------------------------------
+(setq exec-path (cons "C:/Program Files/Git/bin" exec-path))
 
 ;; ---------------------------------
 ;; --- el-get package management ---
@@ -266,7 +96,6 @@
 (push 'ggtags my-el-get-packages)
 (push 'google-this my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
-;;(push 'grandshell my-el-get-packages)
 (push 'iedit my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'multiple-cursors my-el-get-packages)
@@ -274,51 +103,22 @@
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages)
-;(push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
-(push 'yasnippet my-el-get-packages )
-;(push 'helm-gtags my-el-get-packages)
-
-;(push 'auto-complete my-el-get-packages)
-;(push 'auto-complete-auctex my-el-get-packages)
-;(push 'auto-complete-css my-el-get-packages)
-;(push 'auto-complete-yasnippet my-el-get-packages)
-;(push 'auto-complete-c-headers my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
 (push 'openwith my-el-get-packages)
 
 ;; text modes
-;;(push 'auctex my-el-get-packages)
 (push 'markdown-mode my-el-get-packages)
-(push 'org-mode my-el-get-packages)
-(push 'yaml-mode my-el-get-packages)
+
 
 ;; programming modes
-(push 'apache-mode my-el-get-packages)
-;(push 'cedet my-el-get-packages)
-(push 'cmake-mode my-el-get-packages)
-(push 'cperl-mode my-el-get-packages)
-(push 'cython-mode my-el-get-packages)
-;(push 'ecb my-el-get-packages)
-(push 'ess my-el-get-packages) ; for R
-(push 'lua-mode my-el-get-packages)
-;;(push 'mmm-mode my-el-get-packages)
-(push 'php-mode my-el-get-packages)
-(push 'processing-mode my-el-get-packages)
-(push 'protobuf-mode my-el-get-packages)
-(push 'python-mode my-el-get-packages)
-(push 'qml-mode my-el-get-packages)
-(push 'scala-mode my-el-get-packages)
-(push 'thrift-mode my-el-get-packages)
-(push 'tt-mode my-el-get-packages)
-;(push 'csharp-mode my-el-get-packages)
+
 
 ;; version control
-(push 'dsvn my-el-get-packages)
-(push 'magit my-el-get-packages)
-(push 'magit-svn my-el-get-packages)
+;;(push 'magit my-el-get-packages)
+;;(push 'magit-svn my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -625,27 +425,6 @@
 (global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
 (global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
-
-; magit status
-
-(global-set-key (kbd "<C-f12>") 'magit-status)
-
-; auto-load magit-svn-mode if git-svn repo is detected.
-(add-hook 'magit-mode-hook
-          (lambda()
-            ;(require 'magit-svn)
-            ;(if (magit-svn-get-ref-info) (magit-svn-mode))
-            ))
-
-;; Git-Commit-Mode: flyspell
-(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
-
-; svn integration
-
-(autoload 'svn-status "dsvn" "Run `svn status'." t)
-(autoload 'svn-update "dsvn" "Run `svn update'." t)
-
-(global-set-key (kbd "<C-f11>") 'svn-status)
 
 ; go to last edit point
 
