@@ -865,18 +865,6 @@
 ;; trigger auto-complete on TAB
 ;(ac-set-trigger-key "TAB")
 
-;; -----------------
-;; --- yasnippet ---
-;; -----------------
-
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets/"              ;; personal snippets
-        ))
-
-(require 'yasnippet)
-(yas-reload-all)
-(yas-global-mode 1)
-
 ;; --------------------
 ;; --- Java support ---
 ;; --------------------
