@@ -15,6 +15,7 @@
  '(custom-safe-themes
    (quote
     ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+ '(inhibit-startup-screen t)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
@@ -380,6 +381,10 @@
 (setq tramp-auto-save-directory emacs-tmp-dir)
 (setq tramp-persistency-file-name (format "%s/tramp" emacs-tmp-dir))
 (setq image-dired-dir (format "%s/image-dired" emacs-tmp-dir))
+
+;; add line numbers
+(when (version<= "26.0.50" emacs-version )
+  (global-display-line-numbers-mode))
 
 ;; turn on paren matching
 (show-paren-mode t)
