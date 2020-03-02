@@ -11,11 +11,14 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(custom-enabled-themes (quote (tsdh-dark)))
+ '(custom-enabled-themes (quote (tango)))
  '(custom-safe-themes
    (quote
     ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+ '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
@@ -943,7 +946,7 @@
 ;; -----------------------------------
 (defun connect-remote ()
   (interactive)
-  (dired "/ssh:ccx@klinux:/"))
+  (dired "/ssh:ccx@192.168.1.127:/"))
 (global-set-key (kbd "<C-f11>") 'connect-remote)
 
 ;; -----------------------------------
@@ -1163,37 +1166,59 @@
 ;; -------------------------------
 ;; --- Less Latency with Tramp ---
 ;; -------------------------------
+(require 'tramp)
 
 (defvar disable-tramp-backups '(all))
 
-;; (eval-after-load "tramp"
-;;   '(progn
-;;      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-;;      ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
-;;      (setq backup-enable-predicate
-;;            (lambda (name)
-;;              (and (normal-backup-enable-predicate name)
-;;                   ;; Disable all tramp backups
-;;                   (and disable-tramp-backups
-;;                        (member 'all disable-tramp-backups)
-;;                        (not (file-remote-p name 'method)))
-;;                   (not ;; disable backup for tramp with the listed methods
-;;                    (let ((method (file-remote-p name 'method)))
-;;                      (when (stringp method)
-;;                        (member method disable-tramp-backups)))))))
+(eval-after-load "tramp"
+   '(progn
+      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+      ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
+      (setq backup-enable-predicate
+            (lambda (name)
+              (and (normal-backup-enable-predicate name)
+                   ;; Disable all tramp backups
+                   (and disable-tramp-backups
+                        (member 'all disable-tramp-backups)
+                        (not (file-remote-p name 'method)))
+                   (not ;; disable backup for tramp with the listed methods
+                    (let ((method (file-remote-p name 'method)))
+                      (when (stringp method)
+                        (member method disable-tramp-backups)))))))
 
-;;      (defun tramp-set-auto-save--check (original)
-;;        (if (funcall backup-enable-predicate (buffer-file-name))
-;;            (funcall original)
-;;          (auto-save-mode -1)))
+      (defun tramp-set-auto-save--check (original)
+        (if (funcall backup-enable-predicate (buffer-file-name))
+            (funcall original)
+          (auto-save-mode -1)))
 
-;;      (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
+      (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
 
-;;      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
-;;      (setq tramp-ssh-controlmaster-options "")))
+      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
+      (setq tramp-ssh-controlmaster-options ""))
+   )
 
-(setq remote-file-name-inhibit-cache nil)
-(setq vc-ignore-dir-regexp
-      (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
+;;(setq remote-file-name-inhibit-cache nil)
+;;(setq vc-ignore-dir-regexp
+;;      (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
 
 ;;(require 'org-s5)
+
+;; ------------------------------------
+;; --- Highlighting of current line ---
+;; ------------------------------------
+;;(global-hl-line-mode 1)
+;; underline the current line
+;;(set-face-attribute hl-line-face nil :underline t)
+
+(defun highlight-selected-window ()
+  "Highlight selected window with a different background color."
+  (walk-windows (lambda (w)
+                  (unless (eq w (selected-window))
+                    (with-current-buffer (window-buffer w)
+                      (buffer-face-set '(:background "#dde"))))))
+  (buffer-face-set 'default))
+(add-hook 'buffer-list-update-hook 'highlight-selected-window)
+
+;;(custom-set-faces
+;; '(mode-line ((t (:background "dim yellow" :foreground "white"))))
+;; '(mode-line-inactive ((t (:background nil)))))
