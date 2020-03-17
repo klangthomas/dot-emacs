@@ -31,7 +31,7 @@
 -------------------------------------------------------------------------------
 -- File       : <filename>
 -- Author     : Thomas Maintz - thomas.maintz@klang.com
--- Company    : <company>
+-- Company    : KLANG technologies GmbH
 -- Created    : <date>
 -- Last update: <date>
 -- Platform   : <platform>
@@ -123,7 +123,7 @@
 
 
 ;; programming modes
-
+(push 'header2 my-el-get-packages)
 
 ;; version control
 ;;(push 'magit my-el-get-packages)
@@ -899,18 +899,65 @@
 
 (add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
 
-;; -------------------------------------
-;; --- OpenWith program associations ---
-;; -------------------------------------
+;; --------------------
+;; --- C/++ support ---
+;; --------------------
+(require 'header2)
 
-(setq openwith-associations '())
+(defsubst my/header-description ()
+  "Insert \"Description: \" line."
+  (insert header-prefix-string "Description: \n"))
 
-(add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
-(add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
-(add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
+(defsubst my/header-author ()
+  "Insert current user's name (`user-full-name') as this file's author."
+  (insert (concat header-prefix-string "      Author: " (user-full-name) "\n")))
+
+(defsubst my/header-commentary ()
+  "Insert the commentary section"
+  (insert (concat header-prefix-string " Commentary : \n")))
+
+(defsubst my/header-dash-line ()
+  "Insert dashed line"
+  (insert header-prefix-string)
+  (insert-char ?- fill-column)
+  (insert "\n"))
+
+(defsubst my/header-clean-line ()
+  "Insert dashed line"
+  (insert "\n"))
+
+(setq make-header-hook '(my/header-dash-line
+			 header-title
+                         my/header-dash-line
+			 header-blank
+                         header-file-name
+			 header-version
+			 my/header-description
+			 header-blank
+			 my/header-dash-line
+			 header-blank
+                         header-author
+			 header-creation-date
+			 header-blank
+			 header-modification-date
+			 header-modification-author
+			 header-update-count
+			 header-blank
+			 my/header-commentary
+			 header-blank
+			 header-blank
+                         my/header-dash-line
+			 my/header-clean-line
+			 my/header-clean-line
+			 header-eof))
+
+(add-hook 'emacs-lisp-mode-hook 'auto-make-header)
+(add-hook 'c-mode-common-hook   'auto-make-header)
+
+(autoload 'auto-update-file-header "header2")
+(add-hook 'write-file-hooks 'auto-update-file-header)
+
+(global-set-key (kbd "C-c h") 'make-header)
 
 ;; ------------------------------
 ;; --- Compile CMake Projects ---
@@ -944,10 +991,10 @@
 ;; -----------------------------------
 ;; --- Files via SSH on working machine ---
 ;; -----------------------------------
-(defun connect-remote ()
-  (interactive)
-  (dired "/ssh:ccx@192.168.1.127:/"))
-(global-set-key (kbd "<C-f11>") 'connect-remote)
+;(defun connect-remote ()
+;  (interactive)
+;  (dired "/ssh:ccx@192.168.1.127:/"))
+;(global-set-key (kbd "<C-f11>") 'connect-remote)
 
 ;; -----------------------------------
 ;; --- Grand Unified Debugger mode ---
