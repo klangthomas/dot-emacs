@@ -11,7 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#2e3436" "#a40000" "#4e9a06" "#c4a000" "#204a87" "#5c3566" "#729fcf" "#eeeeec"])
- '(custom-enabled-themes (quote (tango)))
+ '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
     ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
@@ -113,6 +113,7 @@
 (push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
+(push 'company-mode my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
@@ -124,6 +125,8 @@
 
 ;; programming modes
 (push 'header2 my-el-get-packages)
+(push 'irony-mode my-el-get-packages)
+(push 'company-irony my-el-get-packages)
 
 ;; version control
 ;;(push 'magit my-el-get-packages)
@@ -412,6 +415,12 @@
 ;; enable inline images:
 ;(iimage-mode)
 
+;; ---------------------------
+;; --- Irony Configuration ---
+;; ---------------------------
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
 ;; --------------------------------
 ;; --- Some custom key bindings ---
 ;; --------------------------------
@@ -431,13 +440,13 @@
 (global-set-key (kbd "C-x K") 'nuke-all-buffers)
 
 ; set keys f9-f12 to insert German umlauts and sz
-(global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
-(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
-(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
-(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
-(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
-(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
-(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
+; (global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
+;(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
+;(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
+;(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
+;(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
+;(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
+;(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
 ; magit status
 
@@ -453,153 +462,6 @@
 ;; Git-Commit-Mode: flyspell
 ;(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
 
-
-; go to last edit point
-
-(global-set-key [(ctrl meta l)] 'goto-last-change);
-
-; bind Backspace and Delete keys with M- and C- to special kill functions
-
-(defun dove-backward-kill-word (&optional arg)
-  "Backward kill word, but do not insert it into kill-ring"
-  (interactive "P")
-  (let (( end (point) )
-        ( beg (progn (backward-word arg) (point)))
-        )
-    (delete-region beg end)
-    )
-  )
-
-(defun dove-forward-kill-word (&optional arg)
-  "Backward kill word, but do not insert it into kill-ring"
-  (interactive "P")
-  (let (( beg (point) )
-        ( end (progn (forward-word arg) (point)))
-        )
-    (delete-region beg end)
-    )
-  )
-
-(global-set-key [(meta backspace)] 'backward-kill-word)
-(global-set-key [(control backspace)] 'dove-backward-kill-word)
-(global-set-key [(meta delete)] 'kill-word)
-(global-set-key [(control delete)] 'dove-forward-kill-word)
-
-(global-set-key "\C-e" 'delete-region)
-
-;; hippie-expand is dabbrev expand on steroids
-
-(global-set-key "\M-/" 'hippie-expand)
-
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-list
-        try-expand-line))
-
-;; special bindings for latex quickies
-
-(defun my-latex-key-bindings ()
-  "Add some latex macro keys"
-  (interactive)
-  (turn-on-reftex)
-  (visual-line-mode 1)
-  (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
-  (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
-  (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
-  (local-set-key "\C-\M-c" (lambda () (interactive) (reftex-citation)))
-  ;; show frames in section list -> very useful for beamer presentations
-  (setq reftex-section-levels
-        (cons '("begin{frame}" . 3) reftex-section-levels))
-  ;; The following makes \C-c\C-c not ask, just do the default action. Adds C-c-a for asking
-  (setq TeX-command-force "LaTeX")
-  ;; 'a' for ask, change to anything you want
-  (local-set-key "\C-c\C-a" (lambda (arg) (interactive "P")
-                            (let ((TeX-command-force nil)) (TeX-command-master arg))))
-  ;; auto folding of tikzpicture and algorithm environments in tex files
-  (TeX-fold-mode 0)
-  (add-hook 'find-file-hook 'TeX-fold-buffer t)
-)
-
-(add-hook 'tex-mode-hook 'my-latex-key-bindings)
-(add-hook 'latex-mode-hook 'my-latex-key-bindings)
-(add-hook 'TeX-mode-hook 'my-latex-key-bindings)
-(add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
-
-(add-to-list 'auto-mode-alist '("\\.tikz$" . latex-mode))
-
-;; enable google-this mode
-
-;; google this word
-;; default keymap: C-c / [key], where key is
-;; RET -> interactive query
-;; w -> google word under cursor
-;; s -> google symbol under cursor
-
-(google-this-mode 1)
-;; hide "Google" minor mode
-(diminish 'google-this-mode)
-
-;; -----------------------------
-;; --- reftex customizations ---
-;; -----------------------------
-
-;; disable query for \ref or \pageref style
-(setq reftex-ref-macro-prompt nil)
-
-;; additional label styles
-(setq reftex-label-alist
-      '(
-        ("theorem"   ?t "thm:" "~\\ref{%s}" t   ("theorem"   "th.") -2)
-        ("lemma"     ?t "lem:" "~\\ref{%s}" t   ("lemma"     "lem") -2)
-        ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
-        ))
-
-;; --------------------
-;; --- flymake mode ---
-;; --------------------
-
-(eval-after-load "flymake"
-  '(progn
-     ;; compile tex using pdflatex
-     (defun flymake-get-tex-args (file-name)
-       (list "~/.emacs.d/flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
-
-     ;; severe logging
-     ;(setq flymake-log-level 9)
-
-     ;; changes timeout
-     (setq flymake-no-changes-timeout 5)
-
-     ;; dont run on enters
-     (setq flymake-start-syntax-check-on-newline nil)
-
-     ;; scan complete files for matching include lines
-     (setq flymake-check-file-limit nil)
-
-     ;; fixes unbalanced braces in LaTeX files
-     (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("^\\(.*?\.tikz\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
-     (push '("Emergency stop." nil nil nil) flymake-err-line-patterns)
-     (push '("Package tikz Error:" nil nil nil) flymake-err-line-patterns)
-
-     ;; disable master search for numeric endings
-     (setq flymake-allowed-file-name-masks
-           (delete '("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-                   flymake-allowed-file-name-masks)) ; don't use multipart tex files
-
-     ;; enable master search for -fig.tex endings
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("fig\\.tex\\'" flymake-master-tex-init flymake-master-cleanup))
-
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("\\.tikz\\'" flymake-master-tex-init flymake-master-cleanup))
-     ))
 
 ;; -----------------------------
 ;; --- bm line bookmark mode ---
@@ -721,147 +583,19 @@
   ;; ---[ end Qt code ]------------------------------------------
 )
 
-(add-hook 'c-mode-common-hook 'tb-c-common-hook)
+;(add-hook 'c-mode-common-hook 'tb-c-common-hook)
 
 ;; mark 80th column on some modes
 
 (add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
 (add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
 
-;; ---------------------------
-;; --- CEDET Configuration ---
-;; ---------------------------
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
 
-;; select which submodes we want to activate
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-; activates CEDET's context menu that is bound to right mouse button;
-;(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-; activates use of separate styles for tags decoration
-;(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
-; activates highlighting of first line for current tag (function, class, etc.);
-;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-; activates displaying of possible name completions in the idle time
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
-; activates highlighting of local names that are the same as name of tag under cursor
-; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
-; activates automatic parsing of source code in the idle time
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-; enables automatic bookmarking of tags that you edited
-;(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-; shows which elements weren't processed by current parser's rules;
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
-; activates mode when name of current tag will be shown in top line of buffer;
-;(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-; enables global support for Semanticdb
-;(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
-; activates displaying of information about current tag in the idle time.
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-; shows changes in the text that weren't processed by incremental parser yet.
-;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-
-;; (setq qt4-base-dir "/usr/include/qt4")
-
-;; (defvar semantic-lex-c-preprocessor-symbol-file '())
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-large.h"))
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
-
-;; ;; Activate semantic
-;; (setq semanticdb-default-save-directory "~/.cache/emacs/semanticdb/")
-;; (semantic-mode 1)
-
-; load semantic databases
-;; (require 'semantic/ia)
-;; (require 'semantic/bovine/gcc) ; or depending on you compiler
-
-;; if you want to enable support for gnu global
-;(semanticdb-enable-gnu-global-databases 'c-mode)
-;(semanticdb-enable-gnu-global-databases 'c++-mode)
-
-; load eassist
-;(add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
-;(require 'eassist)
-
-;; enable ctags for some languages:
-;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
-;(when (cedet-ectag-version-check)
-;  (semantic-load-enable-primary-exuberent-ctags-support))
-
-;; (setq-mode-local c-mode semanticdb-find-default-throttle
-;;                  '(project unloaded system recursive))
-
-;; customisation of modes
-(defun my-cedet-hook ()
-  ;; SRecode
-  ;(global-srecode-minor-mode 1)
-
-  ;; add knowledge of qt to emacs
-  ;; (semantic-add-system-include qt4-base-dir 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
-
-  ;; ;; whatever the symbol you are typing, this hot key automatically complete it for you.
-  ;; (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
-  ;; ;; another way to complete the symbol you are typing
-  ;; (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-
-  ;; ;; when you typed . or -> after an object name, use this key to show possible public member functions or data members.
-  ;; (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-  ;; ;; visit the header file under cursor
-  ;; (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-
-  ;;
-  ;; load eassist contrib library
-  ;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-ce" 'eassist-list-methods)
-  ;;
-  ;; (local-set-key "\C-cr" 'semantic-symref)
-  ;; ;; rename local variable under cursor
-  ;; (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
-
-  ;; jump to the definition of the symbol under cursor
-  ;(local-set-key "\C-c<" 'semantic-ia-fast-jump)
-  ;;  show the document of the symbol under cursor
-  ;(local-set-key "\C-cq" 'semantic-ia-show-doc)
-  ;; show a summary about the symbol under cursor
-  ;(local-set-key "\C-cs" 'semantic-ia-show-summary)
-  ;; toggle between the implementation and a prototype of symbol under cursor
-  ;(local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-
-  ;; unfold the block under cursor
-  ;(local-set-key "\C-c+" 'semantic-tag-folding-show-block)
-  ;; fold the block under cursor
-  ;(local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
-  ;; unfold all
-  ;(local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
-  ;; fold all
-  ;(local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
-
-  ;; show emacs code browser
-  ;(local-set-key "\C-cb" 'ecb-activate)
-
-  ;; auto-complete integration
-  ;(add-to-list 'ac-sources 'ac-source-gtags)
-  ;(add-to-list 'ac-sources 'ac-source-semantic)
-  ;(add-to-list 'ac-sources 'ac-source-c-headers)
-
-  ;; change paragraph definition to correctly wrap doxygen \param and \tparam
-  ;; lines.
-  (setq paragraph-start "\\(//+[!]?\\|\\**\\)[ ]*\\([ ]*$\\|[@\\\\]\\(param\\|tparam\\|return\\|pre\\)\\)\\|\f")
-  )
-
-; (add-hook 'c-mode-common-hook 'my-cedet-hook)
-(add-hook 'lisp-mode-hook 'my-cedet-hook)
-(add-hook 'scheme-mode-hook 'my-cedet-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
-(add-hook 'erlang-mode-hook 'my-cedet-hook)
 
 ;; --------------------------------
 ;; --- ECB - Emacs Code Browser ---
@@ -880,24 +614,6 @@
 (setq ido-everywhere t)
 
 (global-set-key (kbd "M-x") 'smex)
-
-;; ---------------------
-;; --- auto-complete ---
-;; ---------------------
-
-;(require 'auto-complete-config)
-;(ac-config-default)
-
-;; never start automatically
-;(setq ac-auto-start nil)
-;; trigger auto-complete on TAB
-;(ac-set-trigger-key "TAB")
-
-;; --------------------
-;; --- Java support ---
-;; --------------------
-
-(add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
 
 ;; --------------------
 ;; --- C/++ support ---
@@ -959,66 +675,6 @@
 
 (global-set-key (kbd "C-c h") 'make-header)
 
-;; ------------------------------
-;; --- Compile CMake Projects ---
-;; ------------------------------
-
-(require 'compile)
-(setq compilation-disable-input nil)
-(setq compilation-last-buffer nil)
-(setq compilation-scroll-output t)
-(setq mode-compile-always-save-buffer-p t)
-
-(defun my-compile (pfx)
-  "Saves all unsaved buffers, and runs 'compile' with optional ede project customization."
-  (interactive "p")
-  ;; save buffers
-  (save-some-buffers t)
-  ;; if a compilation buffer already exists: switch and recompile
-  (if (buffer-live-p compilation-last-buffer)
-      (recompile)
-    ;; else figure out whether the current directory has an ede-project
-    (let* ((fname (or (buffer-file-name (current-buffer)) default-directory))
-           (current-dir (file-name-directory fname))
-           (proj (ede-current-project current-dir)))
-      (if proj
-          (project-compile-project proj)
-        (call-interactively 'compile)))
-    ))
-
-(global-set-key [f5] 'my-compile)
-
-;; -----------------------------------
-;; --- Files via SSH on working machine ---
-;; -----------------------------------
-;(defun connect-remote ()
-;  (interactive)
-;  (dired "/ssh:ccx@192.168.1.127:/"))
-;(global-set-key (kbd "<C-f11>") 'connect-remote)
-
-;; -----------------------------------
-;; --- Grand Unified Debugger mode ---
-;; -----------------------------------
-
-(add-hook 'gud-mode-hook
-          (lambda ()
-            (define-key gud-mode-map [f4] 'gud-run)
-            (define-key gud-mode-map [f5] 'gud-step)
-            (define-key gud-mode-map [f6] 'gud-next)
-            (define-key gud-mode-map [f7] 'gud-until)
-            (define-key gud-mode-map [f8] 'gud-finish)
-            ))
-
-;; --------------------------
-;; --- Processing Hotkeys ---
-;; --------------------------
-
-(defun processing-mode-init ()
-  (local-set-key [f5] 'processing-sketch-run)
-  )
-
-(add-hook 'processing-mode-hook 'processing-mode-init)
-
 ;; ------------------------
 ;; --- Multiple Cursors ---
 ;; ------------------------
@@ -1030,41 +686,6 @@
           (lambda ()
             (define-key mc/keymap (kbd "<return>") nil)
             ))
-
-;; --------------------------
-;; --- Make eshell Usable ---
-;; --------------------------
-
-(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
-;; ----------------------------------------
-;; --- CamelCase to snake_case and back ---
-;; ----------------------------------------
-
-(defun split-name (s)
-  (split-string
-   (let ((case-fold-search nil))
-     (downcase
-      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
-   "[^A-Za-z0-9]+"))
-
-(defun camelcase  (s) (mapconcat 'capitalize (split-name s) ""))
-(defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
-
-(defun camelscore (s)
-  (cond ((string-match-p "-" s)         (colonize s))
-        ((string-match-p "_" s)	        (dasherize s))
-        (t                              (underscore s))))
-
-(defun camelscore-word-at-point ()
-  (interactive)
-  (let* ((case-fold-search nil)
-         (beg (and (skip-chars-backward "[:alnum:]_") (point)))
-         (end (and (skip-chars-forward  "[:alnum:]_") (point)))
-         (txt (buffer-substring beg end))
-         (cml (camelscore txt)) )
-    (if cml (progn (delete-region beg end) (insert cml))) ))
 
 ;; ------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point ---
@@ -1269,3 +890,18 @@
 ;;(custom-set-faces
 ;; '(mode-line ((t (:background "dim yellow" :foreground "white"))))
 ;; '(mode-line-inactive ((t (:background nil)))))
+
+
+;; ------------------------------------
+;; --- VHDL Tool from vhdltool.com  ---
+;; ------------------------------------
+;;(require 'package)
+;;(add-to-list 'package-archives
+;;             '("melpa" . "https://melpa.org/packages/"))
+;;
+;;(require 'use-package)
+;;(setq lsp-vhdl-server-path "vhdl-tool")
+;
+;;(use-package lsp-mode
+;;         :config
+;;         (add-hook 'vhdl-mode-hook 'lsp))
